@@ -1,0 +1,47 @@
+{
+  "name": "bittricky",
+  "version": "1.0.0",
+  "description": "Mitul Patel's command-line business card",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "bolt-card": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "dev": "node --loader ts-node/esm src/cli.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "cli",
+    "business-card",
+    "card",
+    "profile",
+    "bittricky"
+  ],
+  "author": {
+    "name": "Mitul Patel",
+    "email": "me@mitulpa.tel",
+    "url": "https://mitulpa.tel"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.8.7",
+    "@types/yargs": "^17.0.29",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "boxen": "^7.1.1",
+    "yargs": "^17.7.2"
+  },
+  "engines": {
+    "node": ">=14.16"
+  }
+}
