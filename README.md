@@ -13,7 +13,7 @@ npx bittricky
 Or install it globally:
 
 ```bash
-npm install -g bittricky
+yarn global add bittricky
 ```
 
 ## Usage
@@ -33,30 +33,34 @@ bittricky
 ## Development
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/bittricky/business-card.git
 cd business-card
 ```
 
 2. Install dependencies:
+
 ```bash
-npm install
+yarn install
 ```
 
 3. Start development mode:
+
 ```bash
-npm run dev
+yarn dev
 ```
 
 4. Build the package:
+
 ```bash
-npm run build
+yarn build
 ```
 
 ## Publishing
 
 1. Update the version in `package.json`
-2. Run `npm publish`
+2. Run `yarn publish`
 
 ## License
 
