@@ -1,15 +1,17 @@
 import { BoxOptions } from "../types/global";
 
 export const defaultBoxOptions: BoxOptions = {
-    width: process.stdout.columns,
+    width: process.stdout.columns || 80,
     padding: 2,
     margin: 1,
     align: "left",
 };
 
-export const center = (str: string, width = process.stdout.columns): string => {
-    const pad_left = Math.floor((width - print_width(str)) / 2);
-    const pad_right = width - print_width(str) - pad_left;
+export const center = (str: string, width = process.stdout.columns || 80): string => {
+    const contentWidth = print_width(str);
+    const availableSpace = Math.max(width, contentWidth);
+    const pad_left = Math.max(0, Math.floor((availableSpace - contentWidth) / 2));
+    const pad_right = Math.max(0, availableSpace - contentWidth - pad_left);
     return " ".repeat(pad_left) + str + " ".repeat(pad_right);
 };
 
