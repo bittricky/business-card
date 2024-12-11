@@ -30,6 +30,32 @@ export const remove_ansi = (str: string): string => {
     return str.replace(/\u001b\[\d+m/g, "");
 };
 
+export const box = (content: string) => {
+    const console_width = process.stdout.columns || 80;
+    const line_width = console_width - 4; // Account for borders and padding
+    const lines = content.split("\n");
+    const border = "#".repeat(console_width);
+
+    let output = border + "\n";
+
+    for (const line of lines) {
+        if (line.trim() === "") {
+            output += `# ${" ".repeat(line_width)} #\n`;
+            continue;
+        }
+
+        const splitLines = split_line(line, line_width);
+        for (const splitLine of splitLines) {
+            const visibleWidth = print_width(splitLine);
+            const padding = line_width - visibleWidth;
+            output += `# ${splitLine}${" ".repeat(Math.max(0, padding))} #\n`;
+        }
+    }
+
+    output += border;
+    return output;
+};
+
 export const split_line = (str: string, width: number = process.stdout.columns): string[] => {
     const lines = [];
     let count = 0;
@@ -62,25 +88,4 @@ export const split_line = (str: string, width: number = process.stdout.columns):
     }
 
     return lines;
-};
-
-export const box = (content: string) => {
-    const console_width = process.stdout.columns || 80;
-    const line_width = console_width - 4;
-    const lines = content.split("\n");
-
-    let output = "#".repeat(console_width) + "\n";
-
-    for (const line of lines) {
-        const splitted = split_line(line, line_width);
-
-        for (let i = 0; i < splitted.length; i++) {
-            output +=
-                "# " + splitted[i] + " ".repeat(line_width - print_width(splitted[i])) + " #\n";
-        }
-    }
-
-    output += "#".repeat(console_width);
-
-    return output;
 };

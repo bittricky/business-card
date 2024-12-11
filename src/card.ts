@@ -39,10 +39,10 @@ export async function displayCard(): Promise<void> {
     try {
         const cardContent = generateCardContent();
         await typingLines([cardContent], 1);
-        // Ensure we're done writing
-        process.stdout.write('');
+
+        process.stdout.write("");
     } catch (error) {
-        console.error('Error displaying card:', error);
+        console.error("Error displaying card:", error);
         throw error;
     }
 }
