@@ -35,9 +35,19 @@ export interface ProfileConfig {
     };
     skills: {
         primary: string[];
-        technologies: Technology[];
+        technologies: Array<{
+            name: string;
+            description: string;
+        }>;
     };
-    education: Education[];
+    education: Array<{
+        degree: string;
+        institution: string;
+        period: {
+            start: number;
+            end: number;
+        };
+    }>;
     footer: {
         thankYouMessage: string;
         callToAction: string;
