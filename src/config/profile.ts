@@ -42,7 +42,7 @@ export const profile: ProfileConfig = {
             {
                 name: "MongoDB",
                 description: "A NoSQL Database",
-            }
+            },
             {
                 name: "Supabase",
                 description: "Cloud-based Tools (Authentication, Database, etc.)",
