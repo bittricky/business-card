@@ -2,9 +2,11 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
+import { displayCard } from "./card";
+
 void yargs(hideBin(process.argv))
     .command("$0", "Display the business card", {}, async () => {
-        //TODO: add display card - 12/11/2024
+        await displayCard();
     })
     .option("no-color", {
         type: "boolean",
