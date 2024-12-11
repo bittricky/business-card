@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "bolt-card": "./dist/cli.js"
+    "bittricky": "./dist/cli.js"
   },
   "files": [
     "dist"
