@@ -3,11 +3,12 @@ export const sleep = (time: number): Promise<void> => {
 };
 
 export const typing = async (text: string, delay: number = 1): Promise<void> => {
-    const once = delay > 1 ? 1 : Math.floor(1 / delay);
+    const characters = delay >= 1 ? 1 : Math.max(1, Math.floor(1 / delay));
 
-    for (let i = 0; i < text.length; i++) {
-        process.stdout.write(text.substring(i, i + once));
-        await sleep(once * delay);
+    for (let i = 0; i < text.length; i += characters) {
+        const chunk = text.substring(i, i + characters);
+        process.stdout.write(chunk);
+        await sleep(delay);
     }
 };
 
