@@ -10,13 +10,11 @@ export function formatLink(text: string, url: string): string {
 
 export function formatTechnology(name: string, description: string): string {
     const padding = " ".repeat(Math.max(0, 15 - name.length));
-    return `    ${theme.links.highlight(name)}${padding}- ${theme.text.secondary(description)}`;
+    return `${theme.links.highlight(name)}${padding}- ${theme.text.secondary(description)}`;
 }
 
 export function formatEducation(degree: string, school: string, period: string): string {
-    return `    ${theme.special.title(degree)}, ${theme.text.primary(school)} ${theme.dates(
-        period,
-    )}`;
+    return `${theme.special.title(degree)}, ${theme.text.primary(school)} ${theme.dates(period)}`;
 }
 
 export function formatDivider(width: number = 40): string {

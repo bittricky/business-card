@@ -14,6 +14,13 @@ export interface Technology {
     description: string;
 }
 
+export interface BoxOptions {
+    width?: number;
+    padding?: number;
+    margin?: number;
+    align?: "left" | "center" | "right";
+}
+
 export interface ProfileConfig {
     basics: {
         name: string;
