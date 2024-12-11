@@ -14,8 +14,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
-    "dev": "node --loader ts-node/esm src/cli.ts",
-    "prepublishOnly": "npm run build"
+    "dev": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' src/cli.ts",
+    "prepublishOnly": "yarn build"
   },
   "keywords": [
     "cli",
