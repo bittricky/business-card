@@ -1,6 +1,6 @@
-import { theme } from "../config/theme";
-import { profile } from "../config/profile";
-import { formatEducation } from "../utils/formatting";
+import { theme } from "../config/theme.js";
+import { profile } from "../config/profile.js";
+import { formatEducation } from "../utils/formatting.js";
 
 export function generateEducation(): string[] {
     return [

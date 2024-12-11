@@ -1,17 +1,17 @@
 // Utils
-import { formatDivider } from "./utils/formatting";
-import { box } from "./utils/layout";
-import { typing, typingLines } from "./utils/animation";
+import { formatDivider } from "./utils/formatting.js";
+import { box } from "./utils/layout.js";
+import { typing, typingLines } from "./utils/animation.js";
 
 // Sections
-import { generateHeader } from "./sections/header";
-import { generateSocial } from "./sections/social";
-import { generateSkills } from "./sections/skills";
-import { generateEducation } from "./sections/education";
-import { generateFooter } from "./sections/footer";
+import { generateHeader } from "./sections/header.js";
+import { generateSocial } from "./sections/social.js";
+import { generateSkills } from "./sections/skills.js";
+import { generateEducation } from "./sections/education.js";
+import { generateFooter } from "./sections/footer.js";
 
 // Layout
-import { center } from "./utils/layout";
+import { center } from "./utils/layout.js";
 
 function generateCardContent(): string {
     const divider = center(formatDivider());
@@ -36,6 +36,13 @@ function generateCardContent(): string {
 }
 
 export async function displayCard(): Promise<void> {
-    const cardContent = generateCardContent();
-    await typingLines([cardContent], 1);
+    try {
+        const cardContent = generateCardContent();
+        await typingLines([cardContent], 1);
+        // Ensure we're done writing
+        process.stdout.write('');
+    } catch (error) {
+        console.error('Error displaying card:', error);
+        throw error;
+    }
 }

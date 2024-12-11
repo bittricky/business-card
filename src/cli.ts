@@ -1,14 +1,20 @@
 #!/usr/bin/env node
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { displayCard } from "./card";
+import { displayCard } from "./card.js";
 
-async function main() {
+const run = async () => {
     try {
         await yargs(hideBin(process.argv))
             .command("$0", "Display the business card", {}, async () => {
-                await displayCard();
-                process.exit(0);
+                try {
+                    await displayCard();
+                    // Force process exit after completion
+                    setTimeout(() => process.exit(0), 100);
+                } catch (error) {
+                    console.error("Command error:", error);
+                    process.exit(1);
+                }
             })
             .option("no-color", {
                 type: "boolean",
@@ -18,12 +24,12 @@ async function main() {
             .help()
             .parse();
     } catch (error) {
-        console.error(error);
+        console.error("Yargs error:", error);
         process.exit(1);
     }
-}
+};
 
-main().catch((error) => {
-    console.error(error);
+run().catch((error) => {
+    console.error("Runtime error:", error);
     process.exit(1);
 });

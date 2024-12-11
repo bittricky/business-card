@@ -1,6 +1,6 @@
-import { theme } from "../config/theme";
-import { profile } from "../config/profile";
-import { center } from "../utils/layout";
+import { theme } from "../config/theme.js";
+import { profile } from "../config/profile.js";
+import { center } from "../utils/layout.js";
 
 export function generateFooter(): string[] {
     return [

@@ -1,4 +1,4 @@
-import { theme } from "../config/theme";
+import { theme } from "../config/theme.js";
 
 export const formatSection = (title: string): string => {
     return theme.text.primary(title);
