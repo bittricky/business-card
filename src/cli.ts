@@ -5,11 +5,9 @@ import { displayCard } from "./card.js";
 
 const run = async () => {
     try {
-        console.log("CLI script is running...");
         await yargs(hideBin(process.argv))
             .command("$0", "Display the business card", {}, async () => {
                 try {
-                    console.log("Displaying business card...");
                     await displayCard();
                     // Force process exit after completion
                     setTimeout(() => process.exit(0), 100);
