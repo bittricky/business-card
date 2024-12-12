@@ -1,11 +1,11 @@
 import { theme } from "../config/theme.js";
 
 // Constants for layout
-const CONTENT_WIDTH = 76; // 80 (box width) - 4 (border and padding)
-const PLATFORM_WIDTH = 8;
-const URL_WIDTH = CONTENT_WIDTH - PLATFORM_WIDTH - 3; // -3 for separator and spaces
-const TECH_NAME_WIDTH = 15;
-const TECH_DESC_WIDTH = CONTENT_WIDTH - TECH_NAME_WIDTH - 3; // -3 for separator and spaces
+export const CONTENT_WIDTH = 76; // 80 (box width) - 4 (border and padding)
+export const PLATFORM_WIDTH = 8;
+export const URL_WIDTH = CONTENT_WIDTH - PLATFORM_WIDTH - 3; // -3 for separator and spaces
+export const TECH_NAME_WIDTH = 15;
+export const TECH_DESC_WIDTH = CONTENT_WIDTH - TECH_NAME_WIDTH - 3; // -3 for separator and spaces
 
 export const formatSection = (title: string): string => {
     return theme.text.primary(title.padEnd(CONTENT_WIDTH));

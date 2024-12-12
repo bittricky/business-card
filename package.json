@@ -15,7 +15,12 @@
     "build": "tsc",
     "start": "node dist/cli.js",
     "dev": "tsx src/cli.ts",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "publish": "yarn build && yarn publish",
+    "test": "jest",
+    "test:path": "jest --testPathPattern",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [
     "cli",
@@ -31,8 +36,11 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/node": "^20.8.7",
     "@types/yargs": "^17.0.29",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
     "tsx": "^4.19.2",
     "typescript": "^5.2.2"
   },

@@ -13,7 +13,7 @@ function generateDivider(): string {
     return "-".repeat(50);
 }
 
-function generateCardContent(): string {
+export function generateCardContent(): string {
     const sections = [
         "",
         ...generateHeader(),
