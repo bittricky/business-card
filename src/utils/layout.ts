@@ -1,4 +1,3 @@
-import stripAnsi from "strip-ansi";
 import { BoxOptions } from "../types/global";
 
 export const defaultBoxOptions: BoxOptions = {
@@ -8,14 +7,6 @@ export const defaultBoxOptions: BoxOptions = {
 };
 
 const TOTAL_PADDING = 4; // 2 for border + 2 for padding on each side
-
-export const centerHeader = (str: string, width = process.stdout.columns || 80): string => {
-    const visibleStr = stripAnsi(str);
-    const contentWidth = print_width(visibleStr);
-    const availableWidth = width - TOTAL_PADDING; // Account for borders and padding
-    const padLeft = Math.floor((availableWidth - contentWidth) / 2);
-    return " ".repeat(Math.max(0, padLeft)) + str;
-};
 
 export const center = (str: string, width = process.stdout.columns || 80): string => {
     const contentWidth = print_width(str);

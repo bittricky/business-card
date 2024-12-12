@@ -7,6 +7,7 @@ export function generateSkills(): string[] {
 
     return [
         formatSection(`I mainly write programs in ${primary.join(", ")}.`),
+        "\n",
         formatSection("I have experience developing applications using:"),
         ...technologies.map((tech) => formatTechnology(tech.name, tech.description)),
         "",

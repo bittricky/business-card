@@ -1,18 +1,16 @@
 import { theme } from "../config/theme.js";
 import { profile } from "../config/profile.js";
-import { centerHeader } from "../utils/layout.js";
+import { center } from "../utils/layout.js";
 
 export function generateHeader(): string[] {
     return [
         "",
-        centerHeader(
+        center(
             `${theme.heading("Hey There, I'm ")}${theme.special.title(profile.basics.name)}!`,
-            80
+            114,
         ),
-        centerHeader(
-            `${theme.text.primary("Website:")} ${theme.links.primary(profile.basics.website)}`,
-            80
-        ),
+        center(`${theme.links.primary(profile.basics.website)}`, 95),
+        center(theme.special.accent(profile.basics.title), 95),
         "",
     ];
 }

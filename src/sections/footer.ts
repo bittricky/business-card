@@ -4,8 +4,8 @@ import { center } from "../utils/layout.js";
 
 export function generateFooter(): string[] {
     return [
-        center(theme.special.accent(profile.footer.thankYouMessage)),
-        center(theme.special.accent(profile.footer.callToAction)),
+        center(theme.special.accent(profile.footer.thankYouMessage), 95),
+        center(theme.special.accent(profile.footer.callToAction), 95),
         "",
     ];
 }
