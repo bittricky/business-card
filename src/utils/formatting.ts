@@ -11,6 +11,12 @@ export const formatSection = (title: string): string => {
     return theme.text.primary(title.padEnd(CONTENT_WIDTH));
 };
 
+export const formatSkillsIntro = (colorizedLanguages: string): string => {
+    const prefix = "I mainly write programs in: ";
+    //TODO: dynamically calculate padding that will be repeated
+    return theme.text.primary(prefix) + colorizedLanguages + " ".repeat(9);
+};
+
 export const formatLink = (platform: string, url: string): string => {
     const formattedPlatform = theme.text.secondary(platform.padEnd(PLATFORM_WIDTH));
     const separator = theme.text.muted("|");

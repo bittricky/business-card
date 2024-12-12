@@ -9,8 +9,8 @@ export function generateHeader(): string[] {
             `${theme.heading("Hey There, I'm ")}${theme.special.title(profile.basics.name)}!`,
             114,
         ),
-        center(`${theme.links.primary(profile.basics.website)}`, 95),
-        center(theme.special.accent(profile.basics.title), 95),
+        center(`${theme.links.primary(profile.basics.website)}`, 93),
+        center(theme.special.accent(profile.basics.title), 93),
         "",
     ];
 }
