@@ -30,17 +30,25 @@ export const remove_ansi = (str: string): string => {
     return str.replace(/\u001b\[\d+m/g, "");
 };
 
-export const box = (content: string) => {
-    const console_width = process.stdout.columns || 80;
-    const line_width = console_width - 4; // Account for borders and padding
+export const box = (content: string, options: BoxOptions = defaultBoxOptions) => {
+    const { width = process.stdout.columns || 80, padding = 2, margin = 1 } = options;
+    const line_width = width - padding * 2 - 2; // Subtract padding and border characters
     const lines = content.split("\n");
-    const border = "#".repeat(console_width);
 
-    let output = border + "\n";
+    // Use Unicode box-drawing characters for a more professional look
+    const topBorder = `┌${"─".repeat(width - 2)}┐`;
+    const bottomBorder = `└${"─".repeat(width - 2)}┘`;
+
+    let output: string[] = [topBorder];
+
+    // Add top margin
+    for (let i = 0; i < margin; i++) {
+        output.push(`│${" ".repeat(width - 2)}│`);
+    }
 
     for (const line of lines) {
         if (line.trim() === "") {
-            output += `# ${" ".repeat(line_width)} #\n`;
+            output.push(`│${" ".repeat(width - 2)}│`);
             continue;
         }
 
@@ -48,43 +56,58 @@ export const box = (content: string) => {
         for (const splitLine of splitLines) {
             const visibleWidth = print_width(splitLine);
             const padding = line_width - visibleWidth;
-            output += `# ${splitLine}${" ".repeat(Math.max(0, padding))} #\n`;
+            output.push(`│ ${splitLine}${" ".repeat(Math.max(0, padding))} │`);
         }
     }
 
-    output += border;
-    return output;
+    // Add bottom margin
+    for (let i = 0; i < margin; i++) {
+        output.push(`│${" ".repeat(width - 2)}│`);
+    }
+
+    output.push(bottomBorder);
+    return output.join("\n");
 };
 
 export const split_line = (str: string, width: number = process.stdout.columns): string[] => {
-    const lines = [];
-    let count = 0;
-    let last_escape = "";
+    // Remove ANSI escape sequences for width calculation
+    const cleanStr = remove_ansi(str);
 
-    for (let i = 0; i < str.length; i++) {
-        const matches = [...str.substring(i).matchAll(/\u001B\[[0-9;]*m/g)];
-
-        if (lines[Math.floor(count / width)] === undefined) {
-            lines[Math.floor(count / width)] = last_escape + "";
-        }
-
-        if (matches.length && matches[0].index === 0) {
-            last_escape = str.substring(i, i + matches[0].index);
-            lines[Math.floor(count / width)] += last_escape;
-            i += last_escape.length - 1;
-        } else {
-            const char = str.substring(i, i + 1);
-            lines[Math.floor(count / width)] += char;
-            count += char.codePointAt(0)! > 255 ? 2 : 1;
-        }
-
-        if (count > 0 && count % width === 0) {
-            lines[Math.floor((count - 1) / width)] += "\u001B[0m";
-        }
+    // If the string is shorter than the width, return it as-is
+    if (print_width(cleanStr) <= width) {
+        return [str];
     }
 
-    if (lines[lines.length - 1] && print_width(lines[lines.length - 1]) > width) {
-        lines.pop();
+    const lines: string[] = [];
+    let currentLine = "";
+    let currentWidth = 0;
+
+    for (let i = 0; i < str.length; i++) {
+        const char = str[i];
+        const charWidth = char.codePointAt(0)! > 255 ? 2 : 1;
+
+        // Check for ANSI escape sequences
+        const ansiMatch = str.substring(i).match(/^\u001B\[[0-9;]*m/);
+        if (ansiMatch) {
+            currentLine += ansiMatch[0];
+            i += ansiMatch[0].length - 1;
+            continue;
+        }
+
+        // If adding this character would exceed width, start a new line
+        if (currentWidth + charWidth > width) {
+            lines.push(currentLine);
+            currentLine = "";
+            currentWidth = 0;
+        }
+
+        currentLine += char;
+        currentWidth += charWidth;
+    }
+
+    // Add the last line if not empty
+    if (currentLine) {
+        lines.push(currentLine);
     }
 
     return lines;
