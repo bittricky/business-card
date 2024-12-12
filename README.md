@@ -2,7 +2,7 @@
 
 A command-line business card that displays my contact information and social links.
 
-![Mitul Patel's Business Card](docs/mitul_patel_business_card.png)
+![Mitul Patel's Business Card](https://github.com/bittricky/business-card/blob/main/docs/mitul_patel_business_card.png)
 
 ## Prerequisites
 
