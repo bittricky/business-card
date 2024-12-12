@@ -2,6 +2,17 @@
 
 A command-line business card that displays my contact information and social links.
 
+![Mitul Patel's Business Card](docs/mitul_patel_business_card.png)
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- [Node.js](https://nodejs.org/) version 14.16 or higher
+- [npm](https://www.npmjs.com/) (comes with Node.js) or [yarn](https://yarnpkg.com/) package manager
+
+Note: This package is built with TypeScript and uses modern JavaScript features, so make sure you have a compatible Node.js version installed.
+
 ## Installation
 
 You can run this package using npx:
