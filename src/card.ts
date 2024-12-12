@@ -10,24 +10,23 @@ import { generateEducation } from "./sections/education.js";
 import { generateFooter } from "./sections/footer.js";
 
 function generateDivider(): string {
-    return "-".repeat(50); // The box function will extend this to full width
+    return "-".repeat(50);
 }
 
 function generateCardContent(): string {
-    const divider = generateDivider();
-
     const sections = [
+        "",
         ...generateHeader(),
-        divider,
+        generateDivider(),
         "",
         ...generateSocial(),
-        divider,
+        generateDivider(),
         "",
         ...generateSkills(),
-        divider,
+        generateDivider(),
         "",
         ...generateEducation(),
-        divider,
+        generateDivider(),
         "",
         ...generateFooter(),
     ];
@@ -38,9 +37,11 @@ function generateCardContent(): string {
 export async function displayCard(): Promise<void> {
     try {
         const cardContent = generateCardContent();
-        await typingLines([cardContent], 1);
-
-        process.stdout.write("");
+        await typingLines([cardContent], {
+            charDelay: 2, // Fast typing for individual characters
+            lineDelay: 50, // Slight pause between lines
+            skipAnimation: false,
+        });
     } catch (error) {
         console.error("Error displaying card:", error);
         throw error;

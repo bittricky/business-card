@@ -52,3 +52,9 @@ export interface ProfileConfig {
         callToAction: string;
     };
 }
+
+export interface TypingOptions {
+    charDelay?: number;
+    lineDelay?: number;
+    skipAnimation?: boolean;
+}

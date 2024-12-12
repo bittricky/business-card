@@ -1,30 +1,58 @@
-export const sleep = (time: number): Promise<void> => {
-    return new Promise((resolve) => setTimeout(resolve, time));
+import { TypingOptions } from "../types/global";
+
+const defaultOptions: TypingOptions = {
+    charDelay: 5, // Milliseconds between each character
+    lineDelay: 100, // Milliseconds between each line
+    skipAnimation: false,
 };
 
-export const typing = async (text: string, delay: number = 1): Promise<void> => {
-    try {
-        const characters = delay >= 1 ? 1 : Math.max(1, Math.floor(1 / delay));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-        for (let i = 0; i < text.length; i += characters) {
-            const chunk = text.substring(i, i + characters);
-            process.stdout.write(chunk);
+export const typing = async (
+    text: string,
+    options: TypingOptions = defaultOptions,
+): Promise<void> => {
+    try {
+        if (options.skipAnimation) {
+            process.stdout.write(text);
+            return;
+        }
+
+        const chars = text.split("");
+        for (const char of chars) {
+            process.stdout.write(char);
+            if (char === "\n") {
+                await sleep(options.lineDelay || defaultOptions.lineDelay!);
+            } else {
+                await sleep(options.charDelay || defaultOptions.charDelay!);
+            }
         }
     } catch (error) {
-        console.error('Error in typing:', error);
+        console.error("Error in typing:", error);
         throw error;
     }
 };
 
-export const typingLines = async (lines: string[], delay: number = 1): Promise<void> => {
+export const typingLines = async (
+    lines: string[],
+    options: TypingOptions = defaultOptions,
+): Promise<void> => {
     try {
-        for (const line of lines) {
-            await typing(line + "\n", delay);
+        if (options.skipAnimation) {
+            lines.forEach((line) => process.stdout.write(line + "\n"));
+            return;
         }
-        // Ensure everything is written
-        process.stdout.write('\n');
+
+        for (const line of lines) {
+            await typing(line + "\n", {
+                ...options,
+                lineDelay: 0, // Don't add extra delay between lines when typing individual chars
+            });
+            // Add delay between lines
+            await sleep(options.lineDelay || defaultOptions.lineDelay!);
+        }
     } catch (error) {
-        console.error('Error in typingLines:', error);
+        console.error("Error in typingLines:", error);
         throw error;
     }
 };
