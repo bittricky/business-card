@@ -6,8 +6,6 @@ export const defaultBoxOptions: BoxOptions = {
     align: "left",
 };
 
-const TOTAL_PADDING = 4; // 2 for border + 2 for padding on each side
-
 export const center = (str: string, width = process.stdout.columns || 80): string => {
     const contentWidth = print_width(str);
     const availableSpace = Math.max(width, contentWidth);

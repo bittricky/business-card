@@ -13,7 +13,7 @@ export const formatSection = (title: string): string => {
 
 export const formatSkillsIntro = (colorizedLanguages: string): string => {
     const prefix = "I mainly write programs in: ";
-    //TODO: dynamically calculate padding that will be repeated
+    //TODO: dynamically calculate padding that will be repeated - 12/12/2024
     return theme.text.primary(prefix) + colorizedLanguages + " ".repeat(9);
 };
 
