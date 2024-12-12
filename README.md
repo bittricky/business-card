@@ -68,6 +68,12 @@ yarn dev
 yarn build
 ```
 
+### Testing
+
+- Run tests: `yarn test`
+- Run tests with coverage: `yarn test:coverage`
+- Run tests with specific path: `yarn test:path <path-to-test-file>`
+
 ## Publishing
 
 1. Update the version in `package.json`
