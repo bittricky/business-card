@@ -47,8 +47,8 @@ export const profile: ProfileConfig = {
                 description: "Cloud-based Tools (Authentication, Database, etc.)",
             },
             {
-                name: "Google Cloud Platform",
-                description: "Cloud Computing Services",
+                name: "GCP",
+                description: "Google Cloud Platform",
             },
         ],
     },
