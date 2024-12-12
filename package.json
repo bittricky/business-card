@@ -1,6 +1,6 @@
 {
   "name": "bittricky",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Mitul Patel's command-line business card",
   "type": "module",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r docs/ dist/docs/",
     "start": "node dist/cli.js",
     "dev": "tsx src/cli.ts",
     "prepublishOnly": "yarn build",
