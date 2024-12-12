@@ -1,14 +1,13 @@
 import { theme } from "../config/theme.js";
 import { profile } from "../config/profile.js";
-import { formatTechnology } from "../utils/formatting.js";
+import { formatTechnology, formatSection } from "../utils/formatting.js";
 
 export function generateSkills(): string[] {
     const { primary, technologies } = profile.skills;
 
     return [
-        theme.text.primary(`I mainly create programs in ${primary.join(", ")}.`),
-        "",
-        theme.text.primary("I have experience in developing applications using:"),
+        formatSection(`I mainly write programs in ${primary.join(", ")}.`),
+        formatSection("I have experience developing applications using:"),
         ...technologies.map((tech) => formatTechnology(tech.name, tech.description)),
         "",
     ];

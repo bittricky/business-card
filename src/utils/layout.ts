@@ -1,10 +1,20 @@
+import stripAnsi from "strip-ansi";
 import { BoxOptions } from "../types/global";
 
 export const defaultBoxOptions: BoxOptions = {
-    width: process.stdout.columns || 80,
     padding: 2,
     margin: 1,
     align: "left",
+};
+
+const TOTAL_PADDING = 4; // 2 for border + 2 for padding on each side
+
+export const centerHeader = (str: string, width = process.stdout.columns || 80): string => {
+    const visibleStr = stripAnsi(str);
+    const contentWidth = print_width(visibleStr);
+    const availableWidth = width - TOTAL_PADDING; // Account for borders and padding
+    const padLeft = Math.floor((availableWidth - contentWidth) / 2);
+    return " ".repeat(Math.max(0, padLeft)) + str;
 };
 
 export const center = (str: string, width = process.stdout.columns || 80): string => {
@@ -17,13 +27,7 @@ export const center = (str: string, width = process.stdout.columns || 80): strin
 
 export const print_width = (str: string): number => {
     str = remove_ansi(str);
-    let double = 0;
-    for (let i = 0; i < str.length; i++) {
-        if (str.codePointAt(i)! > 255) {
-            double++;
-        }
-    }
-    return str.length + double;
+    return [...str].reduce((width, char) => width + (char.codePointAt(0)! > 255 ? 2 : 1), 0);
 };
 
 export const remove_ansi = (str: string): string => {
@@ -32,40 +36,44 @@ export const remove_ansi = (str: string): string => {
 
 export const box = (content: string, options: BoxOptions = defaultBoxOptions) => {
     const { width = process.stdout.columns || 80, padding = 2, margin = 1 } = options;
-    const line_width = width - padding * 2 - 2; // Subtract padding and border characters
     const lines = content.split("\n");
 
-    // Use Unicode box-drawing characters for a more professional look
-    const topBorder = `┌${"─".repeat(width - 2)}┐`;
-    const bottomBorder = `└${"─".repeat(width - 2)}┘`;
+    // Use hash characters for borders as shown in the image
+    const border = "#".repeat(width);
+    const divider = "#" + "-".repeat(width - 2) + "#";
 
-    let output: string[] = [topBorder];
+    let output: string[] = [border];
 
     // Add top margin
     for (let i = 0; i < margin; i++) {
-        output.push(`│${" ".repeat(width - 2)}│`);
+        output.push("#" + " ".repeat(width - 2) + "#");
     }
 
     for (const line of lines) {
         if (line.trim() === "") {
-            output.push(`│${" ".repeat(width - 2)}│`);
+            output.push("#" + " ".repeat(width - 2) + "#");
             continue;
         }
 
-        const splitLines = split_line(line, line_width);
-        for (const splitLine of splitLines) {
-            const visibleWidth = print_width(splitLine);
-            const padding = line_width - visibleWidth;
-            output.push(`│ ${splitLine}${" ".repeat(Math.max(0, padding))} │`);
+        // Check if line is a divider (contains only dashes or equal signs)
+        if (/^[-=]+$/.test(remove_ansi(line))) {
+            output.push(divider);
+            continue;
         }
+
+        const visibleWidth = print_width(line);
+        const remainingSpace = width - 2 - visibleWidth;
+        const leftPad = padding;
+        const rightPad = Math.max(0, remainingSpace - padding);
+        output.push("#" + " ".repeat(leftPad) + line + " ".repeat(rightPad) + "#");
     }
 
     // Add bottom margin
     for (let i = 0; i < margin; i++) {
-        output.push(`│${" ".repeat(width - 2)}│`);
+        output.push("#" + " ".repeat(width - 2) + "#");
     }
 
-    output.push(bottomBorder);
+    output.push(border);
     return output.join("\n");
 };
 

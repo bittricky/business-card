@@ -1,10 +1,9 @@
-import { theme } from "../config/theme.js";
 import { profile } from "../config/profile.js";
-import { formatEducation } from "../utils/formatting.js";
+import { formatEducation, formatSection } from "../utils/formatting.js";
 
 export function generateEducation(): string[] {
     return [
-        theme.text.primary("My Educations"),
+        formatSection("My Education:"),
         ...profile.education.map((edu) =>
             formatEducation(
                 edu.degree,

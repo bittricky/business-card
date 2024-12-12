@@ -1,7 +1,6 @@
 // Utils
-import { formatDivider } from "./utils/formatting.js";
 import { box } from "./utils/layout.js";
-import { typing, typingLines } from "./utils/animation.js";
+import { typingLines } from "./utils/animation.js";
 
 // Sections
 import { generateHeader } from "./sections/header.js";
@@ -10,11 +9,12 @@ import { generateSkills } from "./sections/skills.js";
 import { generateEducation } from "./sections/education.js";
 import { generateFooter } from "./sections/footer.js";
 
-// Layout
-import { center } from "./utils/layout.js";
+function generateDivider(): string {
+    return "-".repeat(50); // The box function will extend this to full width
+}
 
 function generateCardContent(): string {
-    const divider = center(formatDivider());
+    const divider = generateDivider();
 
     const sections = [
         ...generateHeader(),
@@ -32,7 +32,7 @@ function generateCardContent(): string {
         ...generateFooter(),
     ];
 
-    return box(sections.join("\n"));
+    return box(sections.join("\n"), { width: 80 });
 }
 
 export async function displayCard(): Promise<void> {
