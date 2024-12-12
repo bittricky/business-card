@@ -25,7 +25,6 @@ export interface ProfileConfig {
     basics: {
         name: string;
         title: string;
-        email: string;
         website: string;
     };
     social: {

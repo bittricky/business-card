@@ -4,7 +4,6 @@ export const profile: ProfileConfig = {
     basics: {
         name: "Mitul Patel",
         title: "Programmer | Technologist",
-        email: "me@mitulpa.tel",
         website: "https://mitulpa.tel",
     },
     social: {
@@ -55,7 +54,7 @@ export const profile: ProfileConfig = {
     },
     education: [
         {
-            degree: "B.Sc. in Management Information Systems",
+            degree: "B.Sc.in Management Information Systems",
             institution: "Rochester Institute of Technology",
             period: {
                 start: 2009,
