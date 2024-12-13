@@ -1,6 +1,6 @@
 {
   "name": "bittricky",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Mitul Patel's command-line business card",
   "type": "module",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "start": "node dist/cli.js",
     "dev": "tsx src/cli.ts",
     "prepublishOnly": "yarn build",
-    "publish": "yarn build && yarn publish",
+    "publish": "yarn build && npm publish",
     "test": "jest",
     "test:path": "jest --testPathPattern",
     "test:watch": "jest --watch",
