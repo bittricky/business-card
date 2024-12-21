@@ -1,6 +1,6 @@
 {
   "name": "bittricky",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Mitul Patel's command-line business card",
   "type": "module",
   "main": "dist/index.js",
