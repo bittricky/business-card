@@ -16,7 +16,9 @@
     "start": "node dist/cli.js",
     "dev": "tsx src/cli.ts",
     "prepublishOnly": "yarn build",
-    "publish": "yarn build && npm publish",
+    "release:patch": "yarn version --patch && yarn publish",
+    "release:minor": "yarn version --minor && yarn publish",
+    "release:major": "yarn version --major && yarn publish",
     "test": "jest",
     "test:path": "jest --testPathPattern",
     "test:watch": "jest --watch",
@@ -47,6 +49,7 @@
   "dependencies": {
     "boxen": "^7.1.1",
     "chalk": "^5.3.0",
+    "open": "^10.1.0",
     "yargs": "^17.7.2"
   },
   "engines": {
