@@ -2,6 +2,7 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { displayCard } from "./card.js";
+import { exec } from "child_process";
 
 const run = async () => {
     try {
@@ -11,6 +12,20 @@ const run = async () => {
                     await displayCard();
                     // Force process exit after completion
                     setTimeout(() => process.exit(0), 100);
+                } catch (error) {
+                    console.error("Command error:", error);
+                    process.exit(1);
+                }
+            })
+            .command("resume", "Open resume in default browser", {}, async () => {
+                try {
+                    exec('open https://www.mitulpa.tel/mitul_patel_resume.pdf', (error) => {
+                        if (error) {
+                            console.error("Failed to open resume:", error);
+                            process.exit(1);
+                        }
+                        process.exit(0);
+                    });
                 } catch (error) {
                     console.error("Command error:", error);
                     process.exit(1);
