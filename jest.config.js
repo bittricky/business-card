@@ -12,4 +12,12 @@ export default {
       useESM: true,
     }],
   },
+  testMatch: [
+    "<rootDir>/src/**/__tests__/**/*.ts",
+    "<rootDir>/src/**/*.test.ts"
+  ],
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "/dist/"
+  ]
 };

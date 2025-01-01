@@ -17,6 +17,7 @@ const run = async () => {
           process.exit(1);
         }
       })
+      .strict()
       .command("resume", "Open resume in default browser", {}, async () => {
         try {
           await open("https://www.mitulpa.tel/mitul_patel_resume.pdf");
@@ -28,11 +29,6 @@ const run = async () => {
           );
           process.exit(1);
         }
-      })
-      .option("no-color", {
-        type: "boolean",
-        description: "Disable colors in output",
-        default: false,
       })
       .help()
       .parse();
