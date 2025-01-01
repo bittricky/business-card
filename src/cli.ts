@@ -2,6 +2,7 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { displayCard } from "./card.js";
+import open from "open";
 
 const run = async () => {
   try {
@@ -17,6 +18,23 @@ const run = async () => {
         }
       })
       .strict()
+      .command("resume", "Open resume in default browser", {}, async () => {
+        try {
+          await open("https://www.mitulpa.tel/mitul_patel_resume.pdf");
+          process.exit(0);
+        } catch (error) {
+          console.error(
+            "ERROR: Failed to open resume in default browser",
+            error
+          );
+          process.exit(1);
+        }
+      })
+      .option("no-color", {
+        type: "boolean",
+        description: "Disable colors in output",
+        default: false,
+      })
       .help()
       .parse();
   } catch (error) {

@@ -29,15 +29,18 @@ yarn global add bittricky
 
 ## Usage
 
-After installing globally, simply run:
+After installing globally, you can use the following commands:
 
 ```bash
+# Display the business card
 bittricky
+
+# Open resume in default browser
+bittricky resume
 ```
 
 ### Options
 
-- `--no-color`: Disable colors in output
 - `--help`: Show help information
 - `--version`: Show version information
 
