@@ -79,9 +79,21 @@ yarn build
 
 ## Publishing
 
-1. Update the version in `package.json`
-2. Run `yarn publish`
+You can publish a new version using one of the following commands:
+
+```bash
+# Patch version (1.0.0 -> 1.0.1)
+yarn publish:patch
+
+# Minor version (1.0.0 -> 1.1.0)
+yarn publish:minor
+
+# Major version (1.0.0 -> 2.0.0)
+yarn publish:major
+```
 
 ## License
 
 MIT
+
+@author [Mitul Patel](https://www.mitulpa.tel/)
