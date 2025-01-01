@@ -30,11 +30,6 @@ const run = async () => {
           process.exit(1);
         }
       })
-      .option("no-color", {
-        type: "boolean",
-        description: "Disable colors in output",
-        default: false,
-      })
       .help()
       .parse();
   } catch (error) {
