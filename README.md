@@ -37,6 +37,9 @@ bittricky
 
 # Open resume in default browser
 bittricky resume
+
+# Open showcase in default browser
+bittricky showcase
 ```
 
 ### Options

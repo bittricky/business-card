@@ -4,6 +4,7 @@ import { hideBin } from "yargs/helpers";
 import { displayCard } from "./card.js";
 import open from "open";
 
+//TODO: add env variables for urls - 03/19/2025
 const run = async () => {
   try {
     await yargs(hideBin(process.argv))
@@ -30,6 +31,23 @@ const run = async () => {
           process.exit(1);
         }
       })
+      .command(
+        "showcase",
+        "Opens the showcase in default browser",
+        {},
+        async () => {
+          try {
+            await open("https://showcase.mitulpa.tel");
+            process.exit(0);
+          } catch (error) {
+            console.error(
+              "ERROR: Failed to open showcase in default browser",
+              error
+            );
+            process.exit(1);
+          }
+        }
+      )
       .help()
       .parse();
   } catch (error) {
